@@ -1,5 +1,7 @@
 # Agent-LV.MAX（record-system）
 
+繁體中文 | [English](README.en.md)
+
 > **Agent 協作紀錄系統：多角色 × 規劃協作 × 循環工程**
 > 讓任何 AI——**特別是本地／較小模型**——以商用 agent 等級的紀律做事的一套系統，由三個可拆可合的技能組成：
 >
