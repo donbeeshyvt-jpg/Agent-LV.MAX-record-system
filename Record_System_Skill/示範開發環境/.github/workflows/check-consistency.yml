@@ -1,0 +1,33 @@
+# CI guard — runs check-consistency on every push/PR so remote committers
+# (GitHub Copilot Coding Agent, web edits, etc.) hit the same gate as local
+# pre-commit. SKILL §3.16 universal-enforcement.
+name: check-consistency
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run check-consistency
+        run: bash scripts/check-consistency.sh
+      - name: Pre-commit-equivalent — block src/ changes without CODE_INDEX update
+        if: github.event_name == ''pull_request''
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          changed=$(git diff --name-only --diff-filter=ACMRD --no-renames "$base"...HEAD)
+          src=$(printf "%s\n" "$changed" | grep -E "^src/" || true)
+          idx=$(printf "%s\n" "$changed" | grep -E "^docs/CODE_INDEX\.md$" || true)
+          if [ -n "$src" ] && [ -z "$idx" ]; then
+            echo "X PR blocked: src/ changed but docs/CODE_INDEX.md was not updated."
+            echo "  Files: $src"
+            echo "  Fix: update docs/CODE_INDEX.md bilingual row (SKILL §3.12 / §3.13)."
+            exit 1
+          fi

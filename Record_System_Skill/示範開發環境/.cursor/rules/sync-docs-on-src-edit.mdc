@@ -1,0 +1,15 @@
+---
+description: Sync docs/CODE_INDEX.md and DEV_LOG.md when editing src/
+globs: ["src/**/*"]
+alwaysApply: false
+---
+
+# Doc sync on src/ edits (SKILL §3.13)
+
+Whenever you modify any file under `src/`:
+
+1. Update the matching row in `docs/CODE_INDEX.md` — bilingual: `Responsibility (EN)` + `職責（繁中）`.
+2. Append a brief entry to `docs/DEV_LOG.md` for the change.
+3. Run `scripts/check-consistency.ps1`.
+
+The git pre-commit hook BLOCKS commits where `src/` changed but `docs/CODE_INDEX.md` was not staged. Don't bypass it — fix the index instead.

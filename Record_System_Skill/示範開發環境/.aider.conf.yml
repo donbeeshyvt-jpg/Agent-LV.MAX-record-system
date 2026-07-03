@@ -1,0 +1,9 @@
+# Aider config (SKILL §3.16) — FUNCTIONAL load-config, NOT a rules copy.
+# Preloads the single source of truth (AGENTS.md) + key docs so Aider onboards docs-first.
+# Universal enforcement (pre-commit hook + check-consistency) still applies regardless.
+read:
+  - AGENTS.md
+  - docs/CODE_INDEX.md
+  - docs/HANDOFF.md
+  - docs/CONVERSATION_LOG.md
+auto-commits: false

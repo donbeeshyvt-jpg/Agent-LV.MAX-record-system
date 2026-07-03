@@ -1,0 +1,15 @@
+---
+description: Pointer to the single source of truth, AGENTS.md (SKILL §3.16)
+alwaysApply: true
+---
+
+# This project follows AGENTS.md
+
+**Read `AGENTS.md` first — it is the single source of truth.** The full rules and the
+docs map live there; this file deliberately does NOT copy them (so they can never drift).
+
+Critical reminders Cursor should always keep in view:
+- After ANY change under `src/`, also update `docs/CODE_INDEX.md` — the git pre-commit hook BLOCKS the commit otherwise.
+- For non-trivial work, get user approval (APPROVED-NNN in `docs/REQUEST_LOG.md`) BEFORE writing code.
+- Keep `docs/CONVERSATION_LOG.md` Active Summary current each turn.
+- Everything else: see `AGENTS.md`.

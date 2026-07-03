@@ -1,0 +1,8 @@
+# 本機個人設定（不進版控）
+.claude/settings.local.json
+**/.claude/settings.local.json
+
+# OS 產物
+.DS_Store
+Thumbs.db
+desktop.ini

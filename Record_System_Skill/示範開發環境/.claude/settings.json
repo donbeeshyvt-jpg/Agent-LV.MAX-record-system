@@ -1,0 +1,27 @@
+{
+  "_comment": "Claude Code project settings — hooks per SKILL §3.13 (doc sync) and §3.15 (conversation log). Commit this file so every agent gets the edit-time reminder and the conversation log auto-appends.",
+  "_cross_platform": "Defaults to PowerShell (Windows / pwsh on macOS/Linux). For pure macOS/Linux/WSL with bash, replace the commands with: bash $CLAUDE_PROJECT_DIR/scripts/post-edit-reminder.sh and bash $CLAUDE_PROJECT_DIR/scripts/log-user-prompt.sh (both .sh variants are shipped). $CLAUDE_PROJECT_DIR is substituted by Claude Code; falls back to relative path if unsupported.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "^(Edit|Write|MultiEdit|NotebookEdit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/scripts/post-edit-reminder.ps1\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/scripts/log-user-prompt.ps1\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# pre-commit — block commits where src/ changed but docs/CODE_INDEX.md was not also staged.
+# SKILL §3.13 / §40 — docs move with code; no per-agent reminders needed.
+# Covers additions, modifications, copies, renames AND deletions (-D), plus rename-out-of-src
+# via --name-status with --no-renames so the source-side path is preserved.
+
+staged=$(git diff --cached --name-only --diff-filter=ACMRD --no-renames)
+src_changed=$(printf "%s\n" "$staged" | grep -E "^src/" || true)
+index_changed=$(printf "%s\n" "$staged" | grep -E "^docs/CODE_INDEX\.md$" || true)
+devlog_changed=$(printf "%s\n" "$staged" | grep -E "^docs/DEV_LOG\.md$" || true)
+
+if [ -n "$src_changed" ] && [ -z "$index_changed" ]; then
+  echo "" >&2
+  echo "X Commit blocked: src/ changed but docs/CODE_INDEX.md was not updated." >&2
+  echo "" >&2
+  echo "  Files under src/ staged:" >&2
+  printf "%s\n" "$src_changed" | sed "s/^/    /" >&2
+  echo "" >&2
+  echo "  Fix (SKILL §3.12 / §3.13):" >&2
+  echo "    1. Open docs/CODE_INDEX.md" >&2
+  echo "    2. Update the bilingual rows (Responsibility EN + 職責 繁中) for the files above" >&2
+  echo "    3. git add docs/CODE_INDEX.md" >&2
+  echo "    4. git commit again" >&2
+  echo "" >&2
+  echo "  Emergency bypass (you MUST log it in docs/ENTROPY_LOG.md per SKILL §37.5 in the same commit):" >&2
+  echo "    git commit --no-verify" >&2
+  echo "" >&2
+  exit 1
+fi
+
+if [ -n "$src_changed" ] && [ -z "$devlog_changed" ]; then
+  echo "" >&2
+  echo "? Warning: src/ changed but docs/DEV_LOG.md was not touched (SKILL §17 — convention, not hook-enforced). Continuing." >&2
+  echo "" >&2
+fi
+
+# Soft warnings (not blocking) for §27/§34 completion gates the hook can detect cheaply:
+# (1) Plan-approval present? (2) Active Summary recent?
+if [ -n "$src_changed" ]; then
+  if [ -f docs/REQUEST_LOG.md ] && ! grep -q "APPROVED-" docs/REQUEST_LOG.md; then
+    echo "? Warning: src/ changed but no APPROVED-NNN row in docs/REQUEST_LOG.md (SKILL §3.14 / §27)." >&2
+  fi
+  if [ -f docs/CONVERSATION_LOG.md ]; then
+    if ! grep -q "## Active Summary" docs/CONVERSATION_LOG.md; then
+      echo "? Warning: docs/CONVERSATION_LOG.md missing Active Summary block (SKILL §3.15)." >&2
+    fi
+  fi
+fi
+
+exit 0
