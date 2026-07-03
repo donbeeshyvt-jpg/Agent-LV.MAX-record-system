@@ -1,7 +1,11 @@
-# AI Agent 技能三件套
+# Agent 協作紀錄系統（多角色 × 規劃協作 × 循環工程）
 
-> 讓任何 AI——**特別是本地／較小模型**——以商用 agent 等級的紀律做事的三件套技能：
-> **怎麼想**（12 角色引擎）×**怎麼持續做**（迴圈工程）×**怎麼不失憶**（docs 治理）。
+> 讓任何 AI——**特別是本地／較小模型**——以商用 agent 等級的紀律做事的一套系統，由三個可拆可合的技能組成：
+>
+> - **多角色** → [`Agent_OS_Skill`](Agent_OS_Skill/)：12 角色多代理作業系統——怎麼想
+> - **規劃協作** → [`Record_System_Skill`](Record_System_Skill/)：開發治理與交接紀錄——怎麼不失憶
+> - **循環工程** → [`Loop_Engineering_Skill`](Loop_Engineering_Skill/)：迴圈工程規劃——怎麼持續做
+>
 > 全部是純 Markdown 的程序 SKILL：貼上 system prompt 就能用，不綁任何特定工具或執行框架，缺工具就誠實降級、絕不假裝。
 
 ---
