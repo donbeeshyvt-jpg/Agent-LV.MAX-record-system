@@ -3,13 +3,13 @@
 [繁體中文](README.md) | English
 
 > **Agent Collaboration & Record System: Multi-Role × Planning Records × Loop Engineering**
-> A suite that lets any AI — **especially local / smaller models** — work with the discipline of a commercial coding agent. Three skills that work standalone or interlocked:
+> Three composable skills that give any AI real discipline: think first, prove it before calling something done, and leave records so the next handoff picks up cleanly. Use them standalone or interlocked; local or smaller models especially get close to commercial-agent quality.
 >
-> - **Multi-Role** → [`Agent_OS_Skill`](Agent_OS_Skill/): a 12-role multi-agent operating system — *how to think*
-> - **Planning & Records** → [`Record_System_Skill`](Record_System_Skill/): development governance & handoff records — *how to never forget*
-> - **Loop Engineering** → [`Loop_Engineering_Skill`](Loop_Engineering_Skill/): planning controlled, self-running loops — *how to keep going*
+> - **Multi-Role** → [`Agent_OS_Skill`](Agent_OS_Skill/): a 12-role multi-agent operating system (how to think)
+> - **Planning & Records** → [`Record_System_Skill`](Record_System_Skill/): development governance & handoff records (how to never forget)
+> - **Loop Engineering** → [`Loop_Engineering_Skill`](Loop_Engineering_Skill/): planning controlled, self-running loops (how to keep going)
 >
-> Everything is pure-Markdown procedural skills: paste a system prompt and go. No binding to any specific tool or framework — missing capabilities degrade honestly, never faked.
+> Everything is pure-Markdown procedural skills: paste a system prompt and go. Not bound to any specific tool or framework; missing capabilities degrade honestly instead of being faked.
 
 > **Language note**: the skill contents (prompts, role files, templates) are written in Traditional Chinese. Modern LLMs follow them fine regardless of your conversation language; ask your model to respond in English if preferred.
 
